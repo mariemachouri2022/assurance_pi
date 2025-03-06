@@ -1,0 +1,116 @@
+package com.maghrebia.User.security;
+
+import com.maghrebia.User.mfa.MfaService;
+import com.maghrebia.User.user.User;
+import com.maghrebia.User.user.UserDto;
+import com.maghrebia.User.user.UserRepository;
+import com.maghrebia.User.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    private final AuthService authService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
+    private final MfaService mfaService;
+    private final UserRepository userRepository;
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    public AuthController(AuthService authService, AuthenticationManager authenticationManager, JwtUtils jwtUtils, MfaService mfaService, UserRepository userRepository) {
+        this.authService = authService;
+        this.authenticationManager = authenticationManager;
+        this.jwtUtils = jwtUtils;
+        this.mfaService = mfaService;
+        this.userRepository = userRepository;
+    }
+
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) {
+        try {
+            // Register the user in the system
+            authService.registerUser(userDto);
+
+            // Generate secret for MFA and get the QR code URL
+            String secret = mfaService.generateSecretKey();
+            String qrCodeUrl = mfaService.getQrCodeUrl(userDto.getUsername(), secret);
+
+            // Store the secret in the database for later MFA validation
+            authService.saveMfaSecret(userDto.getUsername(), secret);
+
+            return ResponseEntity.ok("User registered successfully! Scan the QR code to enable MFA: " + qrCodeUrl);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        try {
+            System.out.println("Tentative de connexion pour : " + loginRequest.getUsername());
+
+            // Authenticate user using username and password
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
+
+            System.out.println("Authentification réussie pour : " + loginRequest.getUsername());
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            // After password authentication, ask for MFA token
+            // Retrieve the stored secret from the database
+            String storedSecret = authService.getMfaSecret(loginRequest.getUsername());
+
+            if (storedSecret != null) {
+                // Convert the MFA code (String) to an integer
+                int mfaCode;
+                try {
+                    mfaCode = Integer.parseInt(loginRequest.getMfaCode());
+                } catch (NumberFormatException e) {
+                    return ResponseEntity.status(400).body("Invalid MFA code format");
+                }
+
+                // Check the MFA token entered by the user
+                boolean isMfaValid = mfaService.verifyCode(storedSecret, mfaCode);
+
+                if (!isMfaValid) {
+                    return ResponseEntity.status(401).body("MFA token is invalid");
+                }
+            }
+
+            // If both username/password and MFA token are valid, generate a JWT token
+            String jwt = jwtUtils.generateJwtToken(loginRequest.getUsername());
+
+            return ResponseEntity.ok(new JwtResponse(jwt));
+        } catch (Exception e) {
+            System.err.println("Erreur lors de l'authentification : " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(401).body("Échec de l'authentification : " + e.getMessage());
+        }
+    }
+    // Endpoint pour demander la réinitialisation
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
+        userService.forgotPassword(email);
+        return ResponseEntity.ok("Email envoyé avec succès !");
+    }
+
+    // Endpoint pour réinitialiser le mot de passe
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestParam String token, @RequestParam String newPassword) {
+        userService.resetPassword(token, newPassword);
+        return ResponseEntity.ok("Mot de passe mis à jour avec succès !");
+    }
+
+}
