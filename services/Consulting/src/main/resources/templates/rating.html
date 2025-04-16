@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Notation</title>
+</head>
+<body>
+<h2>Donnez votre avis sur le produit : <span th:text="${product.name}"></span></h2>
+
+<form id="ratingForm">
+    <label for="score">Note :</label>
+    <select id="score" name="score" required>
+        <option value="1">1 étoile</option>
+        <option value="2">2 étoiles</option>
+        <option value="3">3 étoiles</option>
+        <option value="4">4 étoiles</option>
+        <option value="5">5 étoiles</option>
+    </select>
+
+    <br><br>
+
+    <label for="comment">Commentaire :</label>
+    <textarea id="comment" name="comment" placeholder="Votre commentaire ici"></textarea>
+
+    <br><br>
+
+    <button type="submit">Soumettre</button>
+</form>
+
+<script>
+    document.getElementById("ratingForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const rating = {
+            productId: 123, // ID du produit à noter
+            score: document.getElementById("score").value,
+            comment: document.getElementById("comment").value
+        };
+
+        fetch('http://localhost:8080/ratings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(rating)
+        })
+            .then(response => response.json())
+            .then(data => alert('Merci pour votre évaluation !'))
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>

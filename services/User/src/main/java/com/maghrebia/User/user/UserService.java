@@ -3,17 +3,32 @@ package com.maghrebia.User.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+<<<<<<< HEAD
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+=======
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
@@ -23,6 +38,10 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -67,5 +86,52 @@ public class UserService {
         userRepository.save(user);
     }
 
+<<<<<<< HEAD
     // 🔹 Ajouter un Bean pour le BCryptPasswordEncoder dans une classe de configuration
+=======
+    // Méthode pour récupérer un utilisateur par son nom d'utilisateur
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username); // Assure-toi que findByUsername existe dans ton repository
+    }
+    // 🔹 Ajouter un Bean pour le BCryptPasswordEncoder dans une classe de configuration
+    public Optional<User> findByUsername(String username) {
+        return Optional.ofNullable(userRepository.findByUsername(username));
+    }
+
+
+    // 🔹 Inscription avec un rôle par défaut (CLIENT)
+    public User registerUser(String username, String email, String password) {
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(passwordEncoder.encode(password));
+        user.setRoles(Collections.singleton(ERole.USER)); // Rôle par défaut
+
+        return userRepository.save(user);
+    }
+
+    // 🔹 Mettre à jour les rôles d’un utilisateur
+    public User updateUserRole(String username, Set<ERole> roles) {
+        User user = userRepository.findByUsername(username);
+
+        user.setRoles(roles); // Mise à jour des rôles
+        return userRepository.save(user);
+    }
+
+    // 🔹 Vérifier si un utilisateur en base est ADMIN ou MANAGER
+    public boolean isAdminOrManager(String username) {
+        User user = userRepository.findByUsername(username); // 🔹 Peut retourner null
+
+        // Vérifie si l'utilisateur n'est pas null et si son Set de rôles contient ADMIN ou MANAGER
+        return user != null && (user.getRoles().contains(ERole.ADMIN) || user.getRoles().contains(ERole.MANAGER));
+    }
+    // 🔹 Vérifier le rôle de l'utilisateur connecté
+    public boolean isCurrentUserAdminOrManager() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
+                authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANAGER"));
+    }
+
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
 }

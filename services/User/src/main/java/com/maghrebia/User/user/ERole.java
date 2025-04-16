@@ -46,4 +46,9 @@ public enum ERole {
         authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
         return authorities;
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
 }

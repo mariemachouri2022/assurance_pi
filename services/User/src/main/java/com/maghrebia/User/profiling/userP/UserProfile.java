@@ -19,6 +19,7 @@ public class UserProfile {
     private double monthlyIncome;
     private double monthlyExpenses;
     private boolean hasCreditHistory;
+<<<<<<< HEAD
     private boolean hasCar; // Critère supplémentaire
     private double creditScore; // Score de crédit pour améliorer la recommandation
     private String location; // Localisation pour des produits géo-dépendants
@@ -31,4 +32,7 @@ public class UserProfile {
     public double getCreditScore() {
         return creditScore;
     }
+=======
+    // Ajoutez d'autres champs selon vos besoins
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
 }

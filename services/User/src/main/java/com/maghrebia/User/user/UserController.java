@@ -1,6 +1,10 @@
 package com.maghrebia.User.user;
 
 import org.springframework.http.ResponseEntity;
+<<<<<<< HEAD
+=======
+import org.springframework.security.access.prepost.PreAuthorize;
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +19,15 @@ public class UserController {
         this.userService = userService;
     }
 
+<<<<<<< HEAD
+=======
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
+    @GetMapping("/protected")
+    public ResponseEntity<String> protectedRoute() {
+        return ResponseEntity.ok("Access granted to ADMIN or MANAGER!");
+    }
+
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
@@ -27,6 +40,15 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+<<<<<<< HEAD
+=======
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        return userService.findByUsername(username)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
 /*
     @PutMapping("/{email}")
     public ResponseEntity<User> updateUser(@PathVariable String email, @RequestBody User user) {

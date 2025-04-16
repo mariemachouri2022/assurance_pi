@@ -21,7 +21,15 @@ public class InsuranceProduct {
     private String category; // "Auto", "Santé", "Crédit"
     private String description;
     private double basePrice;
+<<<<<<< HEAD
     private String eligibilityCriteriaJson; // Critères sous forme de JSON
 
     // Constructeurs, Getters, Setters
 }
+=======
+    private List<String> eligibilityCriteria; // Ex: ["hasCar", "age>25"]
+
+    // Constructeurs, Getters, Setters
+}
+
+>>>>>>> 2360348 (ajout des modeles de recommendation + formulaire de satisfaction + openfeign dans le module consulting)
