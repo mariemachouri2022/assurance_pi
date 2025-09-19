@@ -1,0 +1,128 @@
+<div>
+    <div style="width:100% !important;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.html"><img src="assets/Front/images/logo.png" alt="Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pricing.html">Pricing Plans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/AddDevis">Devis</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="login_bt">
+                        <ul>
+                            <li class="active"><a href="#">Registre</a></li>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- header section end -->
+
+<!-- Add Devis Form Section Start -->
+<div class="container">
+    <div class="contact_section layout_padding">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="contact_taital contact_heading">Add Devis</h1>
+            </div>
+        </div>
+        <div class="contact_section_2">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mail_section map_form_container">
+                        <form (ngSubmit)="onSubmit()" #devisForm="ngForm">
+                            <div class="form-group">
+                                <label for="montantEstime">Montant Estimé</label>
+                                <input type="number" class="mail_text" placeholder="Montant Estimé" name="montantEstime" [(ngModel)]="devis.montantEstime" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dateDemande">Date de Demande</label>
+                                <input type="date" class="mail_text" placeholder="Date de Demande" name="dateDemande" [(ngModel)]="devis.dateDemande" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="typeAssurance">Type d'Assurance</label>
+                                <select class="mail_text" name="typeAssurance" [(ngModel)]="devis.typeAssurance" required>
+                                <option value="" disabled selected>Type d'Assurance</option>
+                                <option value="Auto">Auto</option>
+                                <option value="Santé">Santé</option>
+                                <option value="Habitation">Habitation</option>
+                                <option value="Voyage">Voyage</option>
+                                <option value="Ecolie">Ecolie</option>
+                                <option value="Agriculture">Agriculture</option>
+                                <option value="Prevoyance">Prevoyance</option>
+                              </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="etatDevis">État du Devis</label>
+                                <select class="mail_text" name="etatDevis" [(ngModel)]="devis.etatDevis" required>
+                                <option value="" disabled selected>État du Devis</option>
+                                <option value="En Attente">En Attente</option>
+                                <option value="Approuvé">Approuvé</option>
+                                <option value="Rejeté">Rejeté</option>
+                              </select>
+                            </div>
+
+                            <div class="contact_btn_main">
+                                <div class="send_bt active">
+                                    <button type="submit" (click)="onSubmit()">Ajouter</button>
+                                </div>
+                                <div class=" map_bt ">
+                                    <button type="button " (click)="resetForm() ">Annuler</button>
+                                </div>
+                            </div>
+
+                            <div *ngIf="successMessage " class="alert alert-success ">{{ successMessage }}</div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Devis Form Section End -->
+
+<!-- footer section start -->
+<div class="footer_section layout_padding ">
+    <div class="container ">
+        <div class="row ">
+            <div class="col-md-12 ">
+                <div class="footer_logo "><img src="assets/Front/images/footer-logo.png " alt="Footer Logo "></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer section end -->

@@ -1,0 +1,222 @@
+<!-- Section d'en-tête -->
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+
+
+                    </li>
+                    <li class="nav-item"><a class="nav-link" [class.active]="activeNavItem === 'devis'" routerLink="/AcceuilDevis">Devis</a></li>
+                    <li class="nav-item"><a class="nav-link" [class.active]="activeNavItem === 'about'" href="about.html">À propos</a></li>
+                    <li><a class="nav-link" [class.active]="activeNavItem === 'Systéme Recommendation'" routerLink="/AssuranceForm">Systéme Recommendation</a></li>
+                    <li class="nav-item"><a class="nav-link" [class.active]="activeNavItem === 'services'" href="services.html">Services</a></li>
+
+                    <li class="nav-item"><a class="nav-link" [class.active]="activeNavItem === 'contact'" href="contact.html">Contact</a></li>
+
+
+
+                </ul>
+                <div class="auth-buttons">
+                    <a href="#" class="btn register-btn">S'inscrire</a>
+                    <a href="#" class="btn login-btn">Connexion</a>
+                    <button class="search-btn" (click)="toggleSearchOverlay()"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Section Bannière -->
+<section class="banner">
+    <div class="banner-overlay"></div>
+    <div class="container">
+        <h1 class="banner-title">Devis en ligne</h1>
+
+    </div>
+
+</section>
+
+<!-- Contenu Principal -->
+<main>
+    <div class="container py-5">
+
+        <h2 class="section-title">Nos Services d'Assurance</h2>
+        <div class="row service-cards">
+
+            <!-- Assurance Auto -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card pulse">
+                    <div class="card-image">
+                        <img src="assets/Front/images/automobile.png" alt="Devis Auto" class="img-fluid">
+                    </div>
+                    <div class="card-content">
+                        <h3>Devis Auto</h3>
+                        <p>Assurance automobile complète pour la protection optimale de votre véhicule contre tous les risques, accidents et vols</p>
+                        <a routerLink="/AdddevisAuto" class="service-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assurance Santé -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="assets/Front/images/sante.jpg" alt="Devis Santé" class="img-fluid">
+                    </div>
+                    <div class="card-content">
+                        <h3>Devis Santé</h3>
+                        <p>Assurance santé complète couvrant les consultations, les hospitalisations, les médicaments pour toute la famille</p>
+                        <a routerLink="/SanteForm" class="service-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assurance Habitation -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card pulse">
+                    <div class="card-image">
+                        <img src="assets/Front/images/habitation.jpg" alt="Devis Habitation" class="img-fluid">
+                    </div>
+                    <div class="card-content">
+                        <h3>Devis Habitation</h3>
+                        <p>Assurance habitation complète pour protéger efficacement votre logement et vos biens personnels contre tous les risques</p>
+                        <a routerLink="/HabitationForm" class="service-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assurance Voyage -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="assets/Front/images/voyage.jpg" alt="Devis Voyage" class="img-fluid">
+                    </div>
+                    <div class="card-content">
+                        <h3>Devis Voyage</h3>
+                        <p>Assurance voyage complète pour des déplacements en toute sérénité en Tunisie et à l'étranger avec toute une sécurité et protection</p>
+                        <a [routerLink]="['/voyage-form']" class="service-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assurance Agriculture -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card pulse">
+                    <div class="card-image">
+                        <img src="assets/Front/images/agriculture.jpg" alt="Devis Agriculture" class="img-fluid">
+                    </div>
+                    <div class="card-content">
+                        <h3>Devis Agriculture</h3>
+                        <p>Protection complète pour les exploitations agricoles couvrant les cultures, le bétail, les équipements et les bâtiments contre les risques climatiques</p>
+                        <a routerLink="/AgricultureForm" class="service-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assurance Ecolia -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="assets/Front/images/ecolia.jpg" alt="Devis Ecolia" class="img-fluid">
+                    </div>
+                    <div class="card-content">
+                        <h3>Devis Ecolia</h3>
+                        <p>Solutions d'assurance éducation sur mesure pour étudiants et institutions scolaires complètes pour protéger l'avenir de vos enfants</p>
+                        <a routerLink="/AdddevisEcolia" class="service-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assurance Prévoyance -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card pulse">
+                    <div class="card-image">
+                        <img src="assets/Front/images/Prevoyance.jpg" alt="Devis Prevoyance" class="img-fluid">
+                    </div>
+                    <div class="card-content">
+                        <h3>Devis Prévoyance</h3>
+                        <p>Solutions de protection sociale complètes incluant capital décès, et garanties dépendance pour sécuriser l'avenir de vos proches en toutes circonstances</p>
+                        <a routerLink="/AddDevisPrevoyance" class="service-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assurance Vie -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="card-image">
+                        <img src="assets/Front/images/vie.jpg" alt="Devis Vie" class="img-fluid">
+                    </div>
+                    <div class="card-content">
+                        <h3>Devis Vie</h3>
+                        <p>Assurance vie flexible pour sécuriser financièrement l'avenir de vos proches en toute sérénité en Tunisie et à l'étranger avec toute une protection et garantie</p>
+                        <a routerLink="/VieForm" class="service-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+            <app-chatbox></app-chatbox>
+
+
+        </div>
+    </div>
+</main>
+
+<!-- Pied de page -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-heading">
+
+                <p>Contactez notre équipe pour toute question ou demande de support concernant vos assurances.</p>
+            </div>
+
+            <div class="footer-contact-info">
+                <div class="contact-item">
+                    <i class="fa fa-envelope"></i>
+                    <a href="mailto:Maghribia.Assurance@gmail.com">Maghribia.Assurance@gmail.com</a>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa fa-phone"></i>
+                    <a href="tel:+21697819905">+216 97 819 905</a>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa fa-map-marker"></i>
+                    <span>Tunisie - Siège social</span>
+                </div>
+            </div>
+
+            <div class="footer-social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023 Maghribia Assurance. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Overlay de recherche -->
+<div class="search-overlay" *ngIf="showSearchOverlay">
+    <div class="search-container">
+        <form class="search-form">
+            <input type="text" placeholder="Rechercher..." autofocus>
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <button class="close-search" (click)="toggleSearchOverlay()"><i class="fa fa-times"></i></button>
+    </div>
+</div>

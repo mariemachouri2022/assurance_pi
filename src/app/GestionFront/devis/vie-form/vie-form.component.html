@@ -1,0 +1,156 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="assets/Front/images/logo.png" alt="Logo" class="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center">Nouveau Devis Vie</h2>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="devisForm" (ngSubmit)="onSubmit()">
+                <!-- Messages -->
+                <div *ngIf="successMessage" class="alert alert-success">
+                    {{ successMessage }}
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Type de Contrat -->
+                <div class="mb-3">
+                    <label class="form-label">Type de Contrat</label>
+                    <select class="form-select" formControlName="typeContrat">
+              <option value="" disabled selected>Sélectionner</option>
+              <option *ngFor="let type of typeContratOptions" [value]="type">
+                {{ type | titlecase }}
+              </option>
+            </select>
+                    <div *ngIf="devisForm.get('typeContrat')?.invalid && devisForm.get('typeContrat')?.touched" class="text-danger">
+                        Type de contrat requis
+                    </div>
+                </div>
+
+                <!-- Prime Mensuelle -->
+                <div class="mb-3">
+                    <label class="form-label">Prime Mensuelle (MAD)</label>
+                    <input type="number" class="form-control" formControlName="primeMensuelle" step="0.01">
+                    <div *ngIf="devisForm.get('primeMensuelle')?.invalid && devisForm.get('primeMensuelle')?.touched" class="text-danger">
+                        Prime mensuelle requise (minimum 100 MAD)
+                    </div>
+                </div>
+
+                <!-- Bénéficiaire -->
+                <div class="mb-3">
+                    <label class="form-label">Bénéficiaire</label>
+                    <input type="text" class="form-control" formControlName="beneficiaire">
+                    <div *ngIf="devisForm.get('beneficiaire')?.invalid && devisForm.get('beneficiaire')?.touched" class="text-danger">
+                        Nom du bénéficiaire requis (minimum 3 caractères)
+                    </div>
+                </div>
+
+                <!-- Rendement Espéré -->
+                <div class="mb-3">
+                    <label class="form-label">Rendement Espéré (%)</label>
+                    <input type="number" class="form-control" formControlName="rendementEspere" step="0.1">
+                    <div *ngIf="devisForm.get('rendementEspere')?.invalid && devisForm.get('rendementEspere')?.touched" class="text-danger">
+                        Doit être entre 0% et 20%
+                    </div>
+                </div>
+
+                <!-- Durée Minimale -->
+                <div class="mb-3">
+                    <label class="form-label">Durée Minimale (années)</label>
+                    <input type="number" class="form-control" formControlName="dureeMinimale">
+                    <div *ngIf="devisForm.get('dureeMinimale')?.invalid && devisForm.get('dureeMinimale')?.touched" class="text-danger">
+                        Durée minimale requise (minimum 1 an)
+                    </div>
+                </div>
+
+                <!-- Montant Estimé -->
+                <div class="mb-3">
+                    <label class="form-label">Montant Estimé (MAD)</label>
+                    <input type="number" class="form-control" formControlName="montantEstime" step="0.01">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary" [disabled]="devisForm.invalid || isLoading">
+              <span *ngIf="!isLoading">Soumettre le Devis</span>
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+            </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Offers Column - Initially hidden, shown after submission -->
+    <div class="col-md-4" *ngIf="showOffres">
+        <div class="offers-sidebar">
+            <h3 class="offers-title">Nos Offres</h3>
+            <p class="offers-subtitle">Choisissez l'offre qui vous convient</p>
+
+            <div class="offres-container">
+                <div *ngFor="let offre of offres" class="offre-card">
+                    <div class="card-header">
+                        <h4>{{ offre.titre }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ offre.description }}</p>
+                        <div class="price">{{ offre.montant | currency:'TND/Mois' }}</div>
+                        <!-- Removed the features list since it's causing an error -->
+                        <button class="btn btn-select" (click)="selectOffre(offre)">Sélectionner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .bg-gradient-primary {
+        background: linear-gradient(45deg, #2196F3, #1976D2);
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.25);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(45deg, #2196F3, #1976D2);
+        border: none;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card {
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .form-floating>.form-control:focus~label,
+    .form-floating>.form-control:not(:placeholder-shown)~label {
+        color: #2196F3;
+    }
+</style>

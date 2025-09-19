@@ -1,0 +1,84 @@
+<div class="form-wrapper">
+    <!-- Sidebar with insurance image -->
+    <div class="form-sidebar">
+        <div class="sidebar-image">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Insurance illustration">
+            <div class="sidebar-overlay">
+                <h2>Votre sécurité, notre priorité</h2>
+                <p>Notre système intelligent analyse vos besoins pour vous recommander la meilleure couverture</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main form content -->
+    <div class="form-main">
+        <h2 class="form-title">Recommandation d'Assurance</h2>
+
+        <form (ngSubmit)="onSubmit()" #assuranceForm="ngForm" class="enhanced-form">
+            <div class="form-group">
+                <label for="age">Âge:</label>
+                <input id="age" type="number" [(ngModel)]="formData.Age" name="Age" required class="form-control" #age="ngModel" />
+                <div *ngIf="age.invalid && age.touched" class="error-message">L'âge est requis.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="sexe">Sexe:</label>
+                <select id="sexe" [(ngModel)]="formData.Sexe" name="Sexe" required class="form-control" #sexe="ngModel">
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+          </select>
+                <div *ngIf="sexe.invalid && sexe.touched" class="error-message">Le sexe est requis.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="primeAnnuelle">Prime Annuelle:</label>
+                <input id="primeAnnuelle" type="number" [(ngModel)]="formData.Prime_Annuelle" name="Prime_Annuelle" required class="form-control" #primeAnnuelle="ngModel" />
+                <div *ngIf="primeAnnuelle.invalid && primeAnnuelle.touched" class="error-message">La prime annuelle est requise.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="nombreSinistres">Nombre de Sinistres:</label>
+                <input id="nombreSinistres" type="number" [(ngModel)]="formData.Nombre_Sinistres" name="Nombre_Sinistres" required class="form-control" #nombreSinistres="ngModel" />
+                <div *ngIf="nombreSinistres.invalid && nombreSinistres.touched" class="error-message">Le nombre de sinistres est requis.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="montantRembo">Montant Remboursé:</label>
+                <input id="montantRembo" type="number" [(ngModel)]="formData.Montant_Rembo" name="Montant_Rembo" required class="form-control" #montantRembo="ngModel" />
+                <div *ngIf="montantRembo.invalid && montantRembo.touched" class="error-message">Le montant remboursé est requis.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="fidelite">Fidélité (en années):</label>
+                <input id="fidelite" type="number" [(ngModel)]="formData.Fidelite" name="Fidelite" required class="form-control" #fidelite="ngModel" />
+                <div *ngIf="fidelite.invalid && fidelite.touched" class="error-message">La fidélité est requise.</div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+          Prédire
+          <i class="fas fa-magic"></i>
+        </button>
+        </form>
+
+        <!-- Modal pop-up for the result -->
+        <div *ngIf="showModal" class="modal-overlay" (click)="closeModal()">
+            <div class="modal-content" (click)="$event.stopPropagation()">
+                <h3>Type d'assurance recommandé : <span class="highlight">{{ result }}</span></h3>
+                <div *ngIf="probabilities">
+                    <h4>Détails :</h4>
+                    <ul>
+                        <li *ngFor="let key of getKeys(probabilities)">
+                            <span>{{ key }} : {{ (probabilities[key] * 100) | number:'1.0-2' }}%</span>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" [ngClass]="key.toLowerCase()" [style.width.%]="(probabilities[key] * 100)">
+                                    {{ (probabilities[key] * 100) | number:'1.0-0' }}%
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="close-btn" (click)="closeModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

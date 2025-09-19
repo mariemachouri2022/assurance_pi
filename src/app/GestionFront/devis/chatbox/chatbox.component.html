@@ -1,0 +1,24 @@
+<!-- Floating Chat Button -->
+<div class="chat-toggle" (click)="toggleChat()">
+    💬
+</div>
+
+<!-- Chatbox -->
+<div class="chatbox-container" [class.open]="isOpen">
+    <div class="chat-header">
+        <span>Assistant Maghribia 🤖</span>
+        <button (click)="toggleChat()" style="background: none; border: none; color: rgb(245, 221, 198); font-size: 16px;">✖</button>
+    </div>
+
+    <div class="chat-window">
+        <div *ngFor="let msg of messages" class="chat-bubble" [ngClass]="msg.from">
+            <strong *ngIf="msg.from === 'user'">Vous: </strong>
+            <strong *ngIf="msg.from === 'bot'">Assistant Maghribia: </strong> {{ msg.text }}
+        </div>
+    </div>
+
+    <form (submit)="sendMessage()" class="chat-input">
+        <input type="text" [(ngModel)]="userInput" name="chat" placeholder="Posez votre question..." required />
+        <button type="submit">➤</button>
+    </form>
+</div>

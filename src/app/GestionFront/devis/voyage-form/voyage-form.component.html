@@ -1,0 +1,170 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="assets/Front/images/logo.png" alt="Logo" class="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center">Voyage Devis</h2>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="devisForm" (ngSubmit)="onSubmit()">
+                <!-- Messages -->
+                <div *ngIf="successMessage" class="alert alert-success">
+                    {{ successMessage }}
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Duration (days) -->
+                <div class="mb-3">
+                    <label class="form-label">Duration (days)</label>
+                    <input type="number" class="form-control" formControlName="dureeContrat" required>
+                    <div *ngIf="devisForm.get('dureeContrat')?.invalid && devisForm.get('dureeContrat')?.touched" class="text-danger">
+                        Duration is required
+                    </div>
+                </div>
+
+                <!-- Departure Date -->
+                <div class="mb-3">
+                    <label class="form-label">Departure Date</label>
+                    <input type="date" class="form-control" formControlName="dateDepart" required>
+                    <div *ngIf="devisForm.get('dateDepart')?.invalid && devisForm.get('dateDepart')?.touched" class="text-danger">
+                        Departure date is required
+                    </div>
+                </div>
+
+                <!-- Return Date -->
+                <div class="mb-3">
+                    <label class="form-label">Return Date</label>
+                    <input type="date" class="form-control" formControlName="dateRetour" required>
+                    <div *ngIf="devisForm.get('dateRetour')?.invalid && devisForm.get('dateRetour')?.touched" class="text-danger">
+                        Return date is required
+                    </div>
+                </div>
+
+                <!-- Estimated Amount -->
+                <div class="mb-3">
+                    <label class="form-label">Estimated Amount</label>
+                    <input type="number" class="form-control" formControlName="montantEstime" required>
+                    <div *ngIf="devisForm.get('montantEstime')?.invalid && devisForm.get('montantEstime')?.touched" class="text-danger">
+                        Estimated amount is required
+                    </div>
+                </div>
+
+                <!-- Destination -->
+                <div class="mb-3">
+                    <label class="form-label">Destination</label>
+                    <select class="form-select" formControlName="destination" required>
+                        <option value="" disabled selected>Select destination</option>
+                        <option *ngFor="let dest of destinations" [value]="dest">{{dest}}</option>
+                    </select>
+                    <div *ngIf="devisForm.get('destination')?.invalid && devisForm.get('destination')?.touched" class="text-danger">
+                        Destination is required
+                    </div>
+                </div>
+
+                <!-- Age Group -->
+                <div class="mb-3">
+                    <label class="form-label">Age Group</label>
+                    <select class="form-select" formControlName="trancheAge" required>
+                        <option value="" disabled selected>Select age group</option>
+                        <option *ngFor="let age of tranchesAge" [value]="age">{{age}}</option>
+                    </select>
+                    <div *ngIf="devisForm.get('trancheAge')?.invalid && devisForm.get('trancheAge')?.touched" class="text-danger">
+                        Age group is required
+                    </div>
+                </div>
+
+                <!-- Zone -->
+                <div class="mb-3">
+                    <label class="form-label">Zone</label>
+                    <select class="form-select" formControlName="zoneGeographique" required>
+                        <option value="" disabled selected>Select zone</option>
+                        <option *ngFor="let zone of zones" [value]="zone">{{zone}}</option>
+                    </select>
+                    <div *ngIf="devisForm.get('zoneGeographique')?.invalid && devisForm.get('zoneGeographique')?.touched" class="text-danger">
+                        Zone is required
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary" [disabled]="devisForm.invalid || isLoading">
+                        <span *ngIf="!isLoading">Submit</span>
+                        <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Offers Column - Initially hidden, shown after submission -->
+    <div class="col-md-4" *ngIf="showOffres">
+        <div class="offers-sidebar">
+            <h3 class="offers-title">Nos Offres</h3>
+            <p class="offers-subtitle">Choisissez l'offre qui vous convient</p>
+
+            <div class="offres-container">
+                <div *ngFor="let offre of offres" class="offre-card">
+                    <div class="card-header">
+                        <h4>{{ offre.titre }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ offre.description }}</p>
+                        <div class="price">{{ offre.montant | currency:'TND/Mois' }}</div>
+                        <!-- Removed the features list since it's causing an error -->
+                        <button class="btn btn-select" (click)="selectOffre(offre)">Sélectionner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .bg-gradient-primary {
+        background: linear-gradient(45deg, #2196F3, #1976D2);
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.25);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(45deg, #2196F3, #1976D2);
+        border: none;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card {
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .form-floating>.form-control:focus~label,
+    .form-floating>.form-control:not(:placeholder-shown)~label {
+        color: #2196F3;
+    }
+</style>

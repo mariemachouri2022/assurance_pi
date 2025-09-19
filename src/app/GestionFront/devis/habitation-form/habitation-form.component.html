@@ -1,0 +1,147 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="assets/Front/images/logo.png" alt="Logo" class="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center">Nouveau Devis Habitation</h2>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="devisForm" (ngSubmit)="onSubmit()">
+                <!-- Success/Error Messages -->
+                <div *ngIf="successMessage" class="alert alert-success">
+                    {{ successMessage }}
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Surface -->
+                <div class="mb-3">
+                    <label class="form-label">Surface (m²)</label>
+                    <input type="number" class="form-control" formControlName="surface">
+                    <div *ngIf="devisForm.get('surface')?.invalid && devisForm.get('surface')?.touched" class="text-danger">
+                        Surface requise (minimum 1m²)
+                    </div>
+                </div>
+
+                <!-- Type de Logement -->
+                <div class="mb-3">
+                    <label class="form-label">Type de Logement</label>
+                    <select class="form-select" formControlName="typeLogement">
+              <option value="" disabled selected>Choisir un type</option>
+              <option *ngFor="let type of typeLogementOptions" [value]="type">
+                {{ type | titlecase }}
+              </option>
+            </select>
+                </div>
+
+                <!-- Valeur du Bien -->
+                <div class="mb-3">
+                    <label class="form-label">Valeur du Bien (MAD)</label>
+                    <input type="number" class="form-control" formControlName="valeurBien" step="0.01">
+                </div>
+
+                <!-- Niveau de Risque -->
+                <div class="mb-3">
+                    <label class="form-label">Niveau de Risque</label>
+                    <select class="form-select" formControlName="niveauRisque">
+              <option value="FAIBLE">Faible</option>
+              <option value="MOYEN" selected>Moyen</option>
+              <option value="ÉLEVÉ">Élevé</option>
+            </select>
+                </div>
+
+                <!-- Alarme Sécurité -->
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="alarme" formControlName="alarmeSecurite">
+                    <label class="form-check-label" for="alarme">Alarme de sécurité installée</label>
+                </div>
+
+                <!-- Montant Estimé -->
+                <div class="mb-3">
+                    <label class="form-label">Montant Estimé (MAD)</label>
+                    <input type="number" class="form-control" formControlName="montantEstime" step="0.01">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                        <span *ngIf="!isSubmitting">Soumettre le devis</span>
+                        <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Offers Column - Initially hidden, shown after submission -->
+    <div class="col-md-4" *ngIf="showOffres">
+        <div class="offers-sidebar">
+            <h3 class="offers-title">Nos Offres</h3>
+            <p class="offers-subtitle">Choisissez l'offre qui vous convient</p>
+
+            <div class="offres-container">
+                <div *ngFor="let offre of offres" class="offre-card">
+                    <div class="card-header">
+                        <h4>{{ offre.titre }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ offre.description }}</p>
+                        <div class="price">{{ offre.montant | currency:'TND/Mois' }}</div>
+                        <!-- Removed the features list since it's causing an error -->
+                        <button class="btn btn-select" (click)="selectOffre(offre)">Sélectionner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-gradient-primary {
+        background: linear-gradient(45deg, #2196F3, #1976D2);
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.25);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(45deg, #2196F3, #1976D2);
+        border: none;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card {
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .form-floating>.form-control:focus~label,
+    .form-floating>.form-control:not(:placeholder-shown)~label {
+        color: #2196F3;
+    }
+</style>

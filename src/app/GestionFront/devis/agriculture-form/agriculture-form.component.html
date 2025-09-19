@@ -1,0 +1,136 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="assets/Front/images/logo.png" alt="Logo" class="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center">Nouveau Devis Agricole</h2>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="devisForm" (ngSubmit)="onSubmit()">
+                <!-- Error Message -->
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Montant Estimé -->
+                <div class="mb-3">
+                    <label for="montantEstime" class="form-label">Montant Estimé (MAD)</label>
+                    <input type="number" class="form-control" id="montantEstime" formControlName="montantEstime" step="0.01">
+                    <div *ngIf="devisForm.get('montantEstime')?.invalid && devisForm.get('montantEstime')?.touched" class="text-danger">
+                        Montant est requis et doit être positif
+                    </div>
+                </div>
+
+                <!-- Surface d'Exploitation -->
+                <div class="mb-3">
+                    <label for="surfaceExploitation" class="form-label">Surface d'Exploitation (hectares)</label>
+                    <input type="number" class="form-control" id="surfaceExploitation" formControlName="surfaceExploitation" step="0.01">
+                    <div *ngIf="devisForm.get('surfaceExploitation')?.invalid && devisForm.get('surfaceExploitation')?.touched" class="text-danger">
+                        Surface est requise et doit être positive
+                    </div>
+                </div>
+
+                <!-- Type de Culture -->
+                <div class="mb-3">
+                    <label for="typeCulture" class="form-label">Type de Culture</label>
+                    <select class="form-select" id="typeCulture" formControlName="typeCulture">
+              <option value="" disabled selected>Sélectionnez un type</option>
+              <option *ngFor="let type of typeCultureOptions" [value]="type">
+                {{ type | titlecase }}
+              </option>
+            </select>
+                    <div *ngIf="devisForm.get('typeCulture')?.invalid && devisForm.get('typeCulture')?.touched" class="text-danger">
+                        Type de culture est requis
+                    </div>
+                </div>
+
+                <!-- Nombre d'Animaux -->
+                <div class="mb-3">
+                    <label for="nombreAnimaux" class="form-label">Nombre d'Animaux (si applicable)</label>
+                    <input type="number" class="form-control" id="nombreAnimaux" formControlName="nombreAnimaux" min="0">
+                    <div *ngIf="devisForm.get('nombreAnimaux')?.invalid && devisForm.get('nombreAnimaux')?.touched" class="text-danger">
+                        Nombre doit être positif
+                    </div>
+                </div>
+
+                <!-- Valeur du Matériel -->
+                <div class="mb-3">
+                    <label for="valeurMateriel" class="form-label">Valeur du Matériel Agricole (MAD)</label>
+                    <input type="number" class="form-control" id="valeurMateriel" formControlName="valeurMateriel" step="0.01">
+                    <div *ngIf="devisForm.get('valeurMateriel')?.invalid && devisForm.get('valeurMateriel')?.touched" class="text-danger">
+                        Valeur est requise et doit être positive
+                    </div>
+                </div>
+
+                <!-- Risques Couverts -->
+                <div class="mb-3">
+                    <label for="risquesCouverts" class="form-label">Risques à Couvrir</label>
+                    <textarea class="form-control" id="risquesCouverts" rows="3" formControlName="risquesCouverts"></textarea>
+                    <div *ngIf="devisForm.get('risquesCouverts')?.invalid && devisForm.get('risquesCouverts')?.touched" class="text-danger">
+                        Veuillez spécifier les risques à couvrir
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">
+              <span *ngIf="!isLoading">Soumettre le Devis</span>
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            </button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .bg-gradient-primary {
+        background: linear-gradient(45deg, #2196F3, #1976D2);
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.25);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(45deg, #2196F3, #1976D2);
+        border: none;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card {
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .form-floating>.form-control:focus~label,
+    .form-floating>.form-control:not(:placeholder-shown)~label {
+        color: #2196F3;
+    }
+</style>

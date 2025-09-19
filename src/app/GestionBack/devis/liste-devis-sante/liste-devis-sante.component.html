@@ -1,0 +1,507 @@
+<div class="container-scroller">
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+            <a class="navbar-brand brand-logo" href="index.html"><img src="assets/Back/images/logo.svg" alt="logo" /></a>
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/Back/images/logo-mini.svg" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="mdi mdi-menu"></span>
+        </button>
+            <div class="search-field d-none d-md-block">
+                <form class="d-flex align-items-center h-100" action="#">
+                    <div class="input-group">
+                        <div class="input-group-prepend bg-transparent">
+                            <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                        </div>
+                        <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+                    </div>
+                </form>
+            </div>
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown">
+                    <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="nav-profile-img">
+                            <img src="assets/Back/images/faces/face1.PNG" alt="image">
+                            <span class="availability-status online"></span>
+                        </div>
+                        <div class="nav-profile-text">
+                            <p class="mb-1 text-black">Yossra Tlili</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="#">
+                            <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                    </div>
+                </li>
+                <li class="nav-item d-none d-lg-block full-screen-link">
+                    <a class="nav-link">
+                        <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="mdi mdi-email-outline"></i>
+                        <span class="count-symbol bg-warning"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                        <h6 class="p-3 mb-0">Messages</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img src="assets/Back/images/faces/face4.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
+                                <p class="text-gray mb-0"> 1 Minutes ago </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img src="assets/Back/images/faces/face2.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
+                                <p class="text-gray mb-0"> 15 Minutes ago </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img src="assets/Back/images/faces/face3.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
+                                <p class="text-gray mb-0"> 18 Minutes ago </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="p-3 mb-0 text-center">4 new messages</h6>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                        <i class="mdi mdi-bell-outline"></i>
+                        <span class="count-symbol bg-danger"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                        <h6 class="p-3 mb-0">Notifications</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-success">
+                                    <i class="mdi mdi-calendar"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
+                                <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-warning">
+                                    <i class="mdi mdi-cog"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
+                                <p class="text-gray ellipsis mb-0"> Update dashboard </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-info">
+                                    <i class="mdi mdi-link-variant"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
+                                <p class="text-gray ellipsis mb-0"> New admin wow! </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="p-3 mb-0 text-center">See all notifications</h6>
+                    </div>
+                </li>
+                <li class="nav-item nav-logout d-none d-lg-block">
+                    <a class="nav-link" href="#">
+                        <i class="mdi mdi-power"></i>
+                    </a>
+                </li>
+                <li class="nav-item nav-settings d-none d-lg-block">
+                    <a class="nav-link" href="#">
+                        <i class="mdi mdi-format-line-spacing"></i>
+                    </a>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button>
+        </div>
+    </nav>
+
+    <div class="container-fluid page-body-wrapper">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-profile">
+                    <a href="#" class="nav-link">
+                        <div class="nav-profile-image">
+                            <img src="assets/Back/images/faces/face1.PNG" alt="profile" />
+                            <span class="login-status online"></span>
+                            <!--change to offline or busy as needed-->
+                        </div>
+                        <div class="nav-profile-text d-flex flex-column">
+                            <span class="font-weight-bold mb-2">Yossra Tlili</span>
+                            <span class="text-secondary text-small">Project Manager</span>
+                        </div>
+                        <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/Dash">
+                        <span class="menu-title">Dashboard</span>
+                        <i class="mdi mdi-home menu-icon"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/listproduit">
+                        <span class="menu-title">Gestion Produit</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                    </a>
+
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/ui-features/buttons.html">Buttons</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/ui-features/dropdowns.html">Dropdowns</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/ui-features/typography.html">Typography</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+                        <span class="menu-title">Gestion Agence</span>
+                        <i class="mdi mdi-contacts menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="icons">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/icons/font-awesome.html">Font Awesome</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#forms" aria-expanded="false" aria-controls="forms">
+                        <span class="menu-title">Gestion Devis</span>
+                        <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="forms">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" routerLink="/ListeDevisAuto">Liste Auto</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/ListeDevisEcolia">Liste Ecolia</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/ListeDevisHabitation">Liste Habitation</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/ListeDevisVoyage">Liste Voyage</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/ListeDevisSante">Liste Santé</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/ListeDevis/prevoyance">Liste Prevoyance</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/ListeDevisVie">Liste Vie</a></li>
+                            <li class="nav-item"><a class="nav-link" routerLink="/ListeDevisAgriculture">Liste Agriculture</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" routerLink="/ListeCredit" aria-expanded="false" aria-controls="charts">
+                        <span class="menu-title">Gestion Credit</span>
+                        <i class="mdi mdi-chart-bar menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="charts">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/charts/chartjs.html">ChartJs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" routerLink="/AffichageSinistre" aria-expanded="false" aria-controls="tables">
+                        <span class="menu-title">Sinistre</span>
+                        <i class="mdi mdi-table-large menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="tables">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/tables/basic-table.html">Basic table</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                        <span class="menu-title">Gestion Contrat</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-lock menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="auth">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/samples/blank-page.html"> Blank Page </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/samples/login.html"> Login </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/samples/register.html"> Register </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/samples/error-404.html"> 404 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../pages/samples/error-500.html"> 500 </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../docs/documentation.html" target="_blank">
+                        <span class="menu-title">Reclamation</span>
+                        <i class="mdi mdi-file-document-box menu-icon"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Devis Santé</h4>
+                                <div class="search-sort-container">
+                                    <!-- Add this search section above the PDF button -->
+                                    <!-- Add this search section above the PDF button -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="input-group search-box">
+                                                <span class="input-group-text bg-transparent">
+                                              <i class="mdi mdi-magnify"></i>
+                                            </span>
+                                                <input type="text" class="form-control" [(ngModel)]="searchKeyword" (input)="searchDevis()" placeholder="Rechercher par nom ou prénom...">
+                                                <button class="btn btn-outline-secondary" (click)="resetFilters()" [disabled]="!searchKeyword && !selectedSociete">
+                                              <i class="mdi mdi-close"></i>
+                                            </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select class="form-select" [(ngModel)]="selectedSociete" (change)="searchDevis()">
+                                            <option value="">Toutes les sociétés</option>
+                                            <option *ngFor="let societe of getUniqueSocietes()" [value]="societe">{{societe}}</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary w-100" (click)="searchDevis()" [disabled]="isSearching">
+                                            <span *ngIf="!isSearching">Rechercher</span>
+                                            <span *ngIf="isSearching" class="spinner-border spinner-border-sm"></span>
+                                          </button>
+                                        </div>
+                                    </div>
+
+
+                                    <button class="btn btn-success" (click)="generatePDF()">
+                                    <i class="mdi mdi-file-pdf-box mr-1"></i> Exporter en PDF
+                                  </button>
+
+                                    <!-- Update Form -->
+                                    <div *ngIf="showUpdateForm && selectedDevis" class="update-form-container mt-4">
+                                        <div class="insurance-card">
+                                            <div class="card-header bg-primary text-white">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="header-icon mr-3">
+                                                        <i class="mdi mdi-hospital mdi-36px"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h2 class="mb-1">Modifier le devis Santé</h2>
+                                                        <p class="mb-0">Mettez à jour les informations médicales</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <form (ngSubmit)="onUpdateSubmit()" class="insurance-form p-4">
+                                                <!-- Contact Information -->
+                                                <div class="form-section mb-4">
+                                                    <h5 class="section-title">
+                                                        <i class="mdi mdi-account-outline mr-2"></i> Informations du contact
+                                                    </h5>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="contactNom" class="form-label">Nom</label>
+                                                                <input type="text" class="form-control" id="contactNom" [(ngModel)]="selectedDevis.contactNom" name="contactNom" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="contactPrenom" class="form-label">Prénom</label>
+                                                                <input type="text" class="form-control" id="contactPrenom" [(ngModel)]="selectedDevis.contactPrenom" name="contactPrenom" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="contactEmail" class="form-label">Email</label>
+                                                                <input type="email" class="form-control" id="contactEmail" [(ngModel)]="selectedDevis.contactEmail" name="contactEmail" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="contactTelephone" class="form-label">Téléphone</label>
+                                                                <input type="tel" class="form-control" id="contactTelephone" [(ngModel)]="selectedDevis.contactTelephone" name="contactTelephone" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Professional Information -->
+                                                <div class="form-section mb-4">
+                                                    <h5 class="section-title">
+                                                        <i class="mdi mdi-briefcase-outline mr-2"></i> Informations professionnelles
+                                                    </h5>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="contactSociete" class="form-label">Société</label>
+                                                                <input type="text" class="form-control" id="contactSociete" [(ngModel)]="selectedDevis.contactSociete" name="contactSociete">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="contactFonction" class="form-label">Fonction</label>
+                                                                <input type="text" class="form-control" id="contactFonction" [(ngModel)]="selectedDevis.contactFonction" name="contactFonction">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Insurance Information -->
+                                                <div class="form-section mb-4">
+                                                    <h5 class="section-title">
+                                                        <i class="mdi mdi-shield-account mr-2"></i> Informations d'assurance
+                                                    </h5>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="montantEstime" class="form-label">Montant estimé</label>
+                                                                <div class="input-group">
+                                                                    <input type="number" class="form-control" id="montantEstime" [(ngModel)]="selectedDevis.montantEstime" name="montantEstime" min="0" required>
+                                                                    <span class="input-group-text">TND</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="etatDevis" class="form-label">État du devis</label>
+                                                                <select class="form-control" id="etatDevis" [(ngModel)]="selectedDevis.etatDevis" name="etatDevis" required>
+                                                                <option *ngFor="let etat of etatDevisOptions" [value]="etat">
+                                                                    {{ etat }}
+                                                                </option>
+                                                            </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Form Actions -->
+                                                <div class="form-actions d-flex justify-content-between border-top pt-3">
+                                                    <button type="button" class="btn btn-outline-secondary" (click)="cancelUpdate()">
+                                                    <i class="mdi mdi-close-circle-outline mr-1"></i>
+                                                    Annuler
+                                                </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                    <i class="mdi mdi-content-save mr-1"></i>
+                                                    Enregistrer
+                                                </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- Sort Controls -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h4 class="mb-0"></h4>
+                                                <div class="sort-controls">
+                                                    <span class="me-2">Trier par:</span>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-outline-primary btn-sm" (click)="sortDevis('contactNom')">
+                        Nom
+                        <i class="mdi" 
+                           [class.mdi-arrow-up]="sortField === 'contactNom' && sortDirection === 'asc'"
+                           [class.mdi-arrow-down]="sortField === 'contactNom' && sortDirection === 'desc'">
+                        </i>
+                    </button>
+                                                        <button class="btn btn-outline-primary btn-sm" (click)="sortDevis('contactSociete')">
+                        Société
+                        <i class="mdi" 
+                           [class.mdi-arrow-up]="sortField === 'contactSociete' && sortDirection === 'asc'"
+                           [class.mdi-arrow-down]="sortField === 'contactSociete' && sortDirection === 'desc'">
+                        </i>
+                    </button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <!-- List Table -->
+                                    <table class="table table-striped mt-4">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                                <th>Email</th>
+                                                <th>Téléphone</th>
+                                                <th>Société</th>
+
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let devis of filteredDevisList">
+                                                <td>{{ devis.contactNom }}</td>
+                                                <td>{{ devis.contactPrenom }}</td>
+                                                <td>{{ devis.contactEmail }}</td>
+                                                <td>{{ devis.contactTelephone }}</td>
+                                                <td>{{ devis.contactSociete }}</td>
+
+                                                <td>
+                                                    <button class="btn btn-warning btn-sm" (click)="updateDevisSante(devis)">✏️</button>
+                                                    <button class="btn btn-danger" (click)="deleteDevisSante(devis.id)">🗑</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

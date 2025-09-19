@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Insurance Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap @5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons @1.10.0/font/bootstrap-icons.css" />
+    <style>
+         :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--secondary-color);
+        }
+        
+        .navbar {
+            background-color: rgb(236, 153, 9);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .main-container {
+            min-height: calc(100vh - 72px);
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .image-sidebar {
+            flex: 1;
+            background-color: #f0f7ff;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .sidebar-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .sidebar-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sidebar-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .benefits-list i {
+            margin-right: 10px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .form-column {
+            flex: 1;
+            max-width: 800px;
+            padding: 40px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .form-header .header-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e3f2fd;
+            border-radius: 50%;
+            color: var(--primary-color);
+        }
+        
+        .form-header h1 {
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .form-header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .floating-label {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .floating-label label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            padding: 1rem 0.75rem;
+            pointer-events: none;
+            transform-origin: 0 0;
+            transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+        }
+        
+        .floating-label .form-control:focus~label,
+        .floating-label .form-control:not(:placeholder-shown)~label {
+            transform: scale(0.85) translateY(-0.9rem) translateX(0.15rem);
+            opacity: 0.8;
+            background-color: white;
+            padding: 0 5px;
+            left: 8px;
+            color: var(--primary-color);
+        }
+        
+        .floating-label .form-control {
+            height: calc(3.5rem + 2px);
+            padding: 1rem 0.75rem;
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15);
+        }
+        
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px 12px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-secondary {
+            border-color: #dee2e6;
+        }
+        
+        .btn-outline-secondary:hover {
+            background-color: var(--light-gray);
+            border-color: #dee2e6;
+        }
+        
+        @media (max-width: 991.98px) {
+            .form-column {
+                padding: 30px 20px;
+            }
+            .form-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .image-sidebar {
+                display: none;
+            }
+            .form-actions {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="assets/Front/images/logo.png" alt="Logo" style="height: 40px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Image Sidebar -->
+        <!-- Image Sidebar -->
+        <div class="image-sidebar d-none d-lg-flex">
+            <img class="bg-image" src="assets/Front/images/santéeee.jpg" alt="Healthcare Professional">
+            <div class="sidebar-content">
+                <h2>Health Insurance Protection</h2>
+                <p>Secure your family’s health with comprehensive coverage.</p>
+                <ul class="benefits-list">
+                    <li><i class="bi bi-check-circle-fill"></i> Medical Coverage</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Emergency Assistance</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Preventive Care</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Flexible Plans</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Affordable Rates</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Form Column -->
+        <div class="form-column">
+            <div class="form-header">
+                <div class="header-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+                </div>
+                <h1>Get Health Insurance Quote</h1>
+                <p class="subtitle">Fill out the details below to get started</p>
+            </div>
+
+            <form [formGroup]="santeForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+                <!-- Success/Error Messages -->
+                <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+                <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+                <!-- Personal Information -->
+                <div class="row">
+                    <div class="col-md-6 mb-3 floating-label">
+                        <input type="text" class="form-control" id="contactNom" formControlName="contactNom" placeholder=" ">
+                        <label for="contactNom"><i class="bi bi-person me-1"></i> Nom *</label>
+                        <div *ngIf="santeForm.get('contactNom')?.invalid && santeForm.get('contactNom')?.touched" class="invalid-feedback d-block">
+                            Le nom est requis
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3 floating-label">
+                        <input type="text" class="form-control" id="contactPrenom" formControlName="contactPrenom" placeholder=" ">
+                        <label for="contactPrenom"><i class="bi bi-person me-1"></i> Prénom *</label>
+                        <div *ngIf="santeForm.get('contactPrenom')?.invalid && santeForm.get('contactPrenom')?.touched" class="invalid-feedback d-block">
+                            Le prénom est requis
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="row">
+                    <div class="col-md-6 mb-3 floating-label">
+                        <input type="email" class="form-control" id="contactEmail" formControlName="contactEmail" placeholder=" ">
+                        <label for="contactEmail"><i class="bi bi-envelope me-1"></i> Email *</label>
+                        <div *ngIf="santeForm.get('contactEmail')?.errors?.['required'] && santeForm.get('contactEmail')?.touched" class="invalid-feedback d-block">
+                            L'email est requis
+                        </div>
+                        <div *ngIf="santeForm.get('contactEmail')?.errors?.['email'] && santeForm.get('contactEmail')?.touched" class="invalid-feedback d-block">
+                            Veuillez entrer un email valide
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3 floating-label">
+                        <input type="tel" class="form-control" id="contactTelephone" formControlName="contactTelephone" placeholder=" ">
+                        <label for="contactTelephone"><i class="bi bi-telephone me-1"></i> Téléphone</label>
+                        <div *ngIf="santeForm.get('contactTelephone')?.errors?.['pattern']" class="invalid-feedback d-block">
+                            8 chiffres requis
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Information -->
+                <div class="row">
+                    <div class="col-md-6 mb-3 floating-label">
+                        <input type="text" class="form-control" id="contactSociete" formControlName="contactSociete" placeholder=" ">
+                        <label for="contactSociete"><i class="bi bi-building me-1"></i> Société</label>
+                    </div>
+                    <div class="col-md-6 mb-3 floating-label">
+                        <input type="text" class="form-control" id="contactFonction" formControlName="contactFonction" placeholder=" ">
+                        <label for="contactFonction"><i class="bi bi-briefcase me-1"></i> Fonction</label>
+                    </div>
+                </div>
+
+                <!-- Insurance Details -->
+                <div class="row">
+                    <div class="col-md-4 mb-3 floating-label">
+                        <input type="date" class="form-control" id="contactDateNaissance" formControlName="contactDateNaissance" placeholder=" ">
+                        <label for="contactDateNaissance"><i class="bi bi-calendar-event me-1"></i> Date de naissance *</label>
+                        <div *ngIf="santeForm.get('contactDateNaissance')?.invalid && santeForm.get('contactDateNaissance')?.touched" class="invalid-feedback d-block">
+                            La date de naissance est requise
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 floating-label">
+                        <input type="number" class="form-control" id="montantEstime" formControlName="montantEstime" min="0" placeholder=" ">
+                        <label for="montantEstime"><i class="bi bi-cash me-1"></i> Montant estimé (TND) *</label>
+                        <div *ngIf="santeForm.get('montantEstime')?.errors?.['required']" class="invalid-feedback d-block">
+                            Le montant est requis
+                        </div>
+                        <div *ngIf="santeForm.get('montantEstime')?.errors?.['min']" class="invalid-feedback d-block">
+                            Doit être positif
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Hidden Type Assurance -->
+                <input type="hidden" formControlName="typeAssurance">
+
+                <!-- Submit Button -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5" [disabled]="santeForm.invalid || isSubmitting">
+            <span *ngIf="!isSubmitting">Enregistrer</span>
+            <span *ngIf="isSubmitting">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Enregistrement...
+            </span>
+          </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap @5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
